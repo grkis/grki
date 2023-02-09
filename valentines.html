@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Where to take your date for Valentine's Day <3</title>
+  <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a point, line, and polygon</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -33,7 +33,7 @@
 
   const view = new MapView({
     map: map,
-    center: [43.6544033011977, -79.3878245532676], //Longitude, latitude
+    center: [43.64912866975316, -79.42114241781402], //Longitude, latitude
     zoom: 13,
     container: "viewDiv"
  });
@@ -43,23 +43,24 @@
 
  const point = { //Create a point
     type: "point",
-    longitude: 43.64936595283972,
-    latitude: -79.4278064304721
+    longitude: 43.649350622199684,
+    latitude: -79.42787271049929
  };
  const simpleMarkerSymbol = {
     type: "simple-marker",
-    color: red,
+    color: #FF0000,  // Red
     outline: {
-        color: black, 
+        color: #000000, //White
         width: 1
     }
  };
+
  const pointGraphic = new Graphic({
     geometry: point,
     symbol: simpleMarkerSymbol
  });
  graphicsLayer.add(pointGraphic);
-    
+
  });
 </script>
 </head>
