@@ -1,90 +1,95 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title> Where to go with your Valentine! </title>
-  <style>
-    html, body, #viewDiv {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width: 100%;
-    }
-  </style>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
-  <script src="https://js.arcgis.com/4.25/"></script>
-  <script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Where to take your Valentine!</title>
 
-  require([
-    "esri/config",
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/Graphic",
-    "esri/layers/GraphicsLayer"
+    <style>
+      html,
+      body,
+      #map {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        color: #323232;
+      }
 
-    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer) {
+      #basemaps-wrapper {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0);
+      }
+      #basemaps {
+        font-size: 16px;
+        padding: 4px 8px;
+      }
 
-  esriConfig.apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
+    </style>
+    <script src=https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.js></script>
+    <link href=https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css rel="stylesheet" />
 
-  const map = new Map({
-    basemap: "arcgis-streets-night" //Basemap layer service
-  });
+  </head>
 
-  const view = new MapView({
-    map: map,
-    center: [43.65334866962848, -79.38097551830482], //Longitude, latitude
-    zoom: 13,
-    container: "viewDiv"
- });
+  <body>
+    <div id="map"></div>
 
- const graphicsLayer = new GraphicsLayer();
- map.add(graphicsLayer);
+    <div id="basemaps-wrapper">
 
- const point = { //Create a point
-    type: "point",
-    longitude: 43.6494019002754,
-    latitude: -79.42790560011771
- };
- const simpleMarkerSymbol = {
-    type: "simple-marker",
-    color: [220,20,60],  // Red
-    outline: {
-        color: [0,0,0], // Black
-        width: 1
-    }
- };
+      <select id="basemaps">
+        <option value="ArcGIS:Streets">Streets</option>
+        <option value="ArcGIS:Navigation">Navigation</option>
+        <option value="ArcGIS:Topographic">Topographic</option>
+        <option value="ArcGIS:LightGray">Light Gray</option>
+        <option value="ArcGIS:DarkGray">Dark gray</option>
+        <option value="ArcGIS:StreetsRelief">Streets Relief</option>
+        <option value="ArcGIS:Imagery:Standard">Imagery</option>
+        <option value="ArcGIS:ChartedTerritory">ChartedTerritory</option>
+        <option value="ArcGIS:ColoredPencil">ColoredPencil</option>
+        <option value="ArcGIS:Nova">Nova</option>
+        <option value="ArcGIS:Midcentury">Midcentury</option>
+        <option value="OSM:Standard">OSM</option>
+        <option value="OSM:Streets">OSM:Streets</option>
+      </select>
 
- const pointGraphic = new Graphic({
-    geometry: point,
-    symbol: simpleMarkerSymbol
- });
- graphicsLayer.add(pointGraphic);
+    </div>
 
-    // Create a line geometry
- const polyline = {
-    type: "polyline",
-    paths: [
-        [-118.821527826096, 34.0139576938577], //Longitude, latitude
-        [-118.814893761649, 34.0080602407843], //Longitude, latitude
-        [-118.808878330345, 34.0016642996246]  //Longitude, latitude
-    ]
- };
- const simpleLineSymbol = {
-    type: "simple-line",
-    color: [226, 119, 40], // Orange
-    width: 2
- };
+    <script>
+      const apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
+      const basemapEnum = "ArcGIS:Streets";
+      const map = new maplibregl.Map({
+        container: "map", // the id of the div element
+        style: `https://basemaps-api.arcgis.com/arcgis/rest/services/styles/${basemapEnum}?type=style&token=${apiKey}`,
+        zoom: 12, // starting zoom
+        center: [43.65309554868096, -79.38314949190969], // starting location [longitude, latitude]
+        attributionControl: false
+      }).addControl(
+        new maplibregl.AttributionControl({
+          compact: true // reduces the copyright attributions view
+        })
+      );
 
- const polylineGraphic = new Graphic({
-    geometry: polyline,
-    symbol: simpleLineSymbol
- });
- graphicsLayer.add(polylineGraphic);
+      const baseUrl = "https://basemaps-api.arcgis.com/arcgis/rest/services/styles";
+      const url = (name) => `${baseUrl}/${name}?type=style&token=${apiKey}`;
 
- });
-</script>
-</head>
-<body>
-  <div id="viewDiv"></div>
-</body>
+      const setBasemap = (name) => {
+        // Instantiate the given basemap layer.
+        map.setStyle(url(name));
+      };
+
+      setBasemap("ArcGIS:Streets");
+
+      const basemapsSelectElement = document.querySelector("#basemaps");
+
+      basemapsSelectElement.addEventListener("change", (e) => {
+        setBasemap(e.target.value);
+      });
+
+    </script>
+
+  </body>
 </html>
