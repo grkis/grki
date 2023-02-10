@@ -56,9 +56,21 @@
     }
  };
 
+ const popupTemplate1 = {
+    title: "{Name}",
+    content: "{Description}"
+ }
+ const attributes1 = {
+    Name: "Milou",
+    Description: "Start your date at a cozy and romantic French restaurant."
+ }   
+    
  const pointGraphic = new Graphic({
     geometry: point,
-    symbol: simpleMarkerSymbol
+    symbol: simpleMarkerSymbol,
+   
+    attributes: attributes1,
+    popupTemplate: popupTemplate1
  });
  graphicsLayer.add(pointGraphic);
 
