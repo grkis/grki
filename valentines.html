@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a Web Map</title>
+  <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a feature layer</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -16,43 +16,38 @@
   <script src="https://js.arcgis.com/4.25/"></script>
 
   <script>
-    require([
-      "esri/config",
-      "esri/Map",
-      "esri/WebMap",
-      "esri/views/MapView",
-      "esri/widgets/ScaleBar",
-      "esri/widgets/Legend"
-    ], function(esriConfig, WebMap, MapView, ScaleBar, Legend) {
+  require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView",
 
-    esriConfig.apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
+    "esri/layers/FeatureLayer"
 
-      const webmap = new WebMap({
-        portalItem: {
-          id: "41281c51f9de45edaf1c8ed44bb10e30"
-        }
-      });
+  ], function(esriConfig,Map, MapView, FeatureLayer) {
 
-      const view = new MapView({
-        container: "viewDiv",
+  esriConfig.apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
 
-        map: webmap
+  const map = new Map({
+    basemap: "arcgis-topographic"
+  });
 
-      });
+  const view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [-118.80543,34.02700],
+    zoom: 13
+  });
 
-      const scalebar = new ScaleBar({
-        view: view
-      });
+//Trailheads feature layer (points)
+  const trailheadsLayer = new FeatureLayer({
+    url: "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Top_10_Coffee_in_Toronto/FeatureServer"
+  });
 
-      view.ui.add(scalebar, "bottom-left");
-
-    const legend = new Legend ({
-        view: view
-      });
-      view.ui.add(legend, "top-right");
+  map.add(trailheadsLayer);
 
   });
-  </script>
+</script>
+
 </head>
 <body>
   <div id="viewDiv"></div>
