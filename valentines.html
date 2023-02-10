@@ -38,32 +38,31 @@
     zoom: 13
   });
 
-  const graphicsLayer = new GraphicsLayer();
-   map.add(graphicsLayer);
+ const graphicsLayer = new GraphicsLayer();
+ map.add(graphicsLayer);
 
-  const point = { //Create a point
-   type: "point",
-   longitude: -79.42789226082195,
-   latitude: 43.64937371598194
-  };
-  const simpleMarkerSymbol = {
-   type: "simple-marker",
-   color: [226, 119, 40],  // Orange
-   outline: {
-       color: [255, 255, 255], // White
-       width: 1
-   }
-  };
-    
-  const pointGraphic = new Graphic({
-   geometry: point,
-   symbol: simpleMarkerSymbol
+ const point = { //Create a point
+    type: "point",
+    longitude: -79.42788153198609, 
+    latitude: 43.649397005404445
+ };
+ const simpleMarkerSymbol = {
+    type: "simple-marker",
+    color: [226, 119, 40],  // Orange
+    outline: {
+        color: [255, 255, 255], // White
+        width: 1
+    }
+ };
+
+ const pointGraphic = new Graphic({
+    geometry: point,
+    symbol: simpleMarkerSymbol
  });
- graphicsLayer.add(pointGraphic);  
-    
-  });
-</script>
+ graphicsLayer.add(pointGraphic);
 
+ });
+</script>
 </head>
 <body>
   <div id="viewDiv"></div>
