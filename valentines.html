@@ -124,11 +124,11 @@
  graphicsLayer.add(polygonGraphic);
  
  // Add Feature Layer
- const featureLayer = new FeatureLayer({
+const featureLayer = new FeatureLayer({
   url:
-    "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Top_10_Coffee_in_Toronto/FeatureServer/0/?token=AsvsXWSuAs4049KaPbC_Rn_ISs6-rbRucx6egmtp5G9WDkuo1DtO3aHzvscwZi7YCE0S5LlN_xbJfaFh4pzJAOK7Oz50bBFo70p5Hmojt76hSJ1XyiquUrMFNaybJNpeLFEcvJ_ij4hF064IFEG3rA.."
+    "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Top_10_Coffee_in_Toronto/FeatureServer"
 });
-map.add(featureLayer);
+graphicsLayer.add(featureLayer);
 
  });
 </script>
