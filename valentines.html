@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a point, line, and polygon</title>
+  <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a Web Map</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -14,84 +14,45 @@
   </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.25/"></script>
+
   <script>
+    require([
+      "esri/config",
+      "esri/Map",
+      "esri/WebMap",
+      "esri/views/MapView",
+      "esri/widgets/ScaleBar",
+      "esri/widgets/Legend"
+    ], function(esriConfig, WebMap, MapView, ScaleBar, Legend) {
 
-  require([
-    "esri/config",
-    "esri/Map",
-    "esri/views/MapView",
+    esriConfig.apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
 
-    "esri/Graphic",
-    "esri/layers/GraphicsLayer"
+      const webmap = new WebMap({
+        portalItem: {
+          id: "e2861423918b4f94992e36e6a985bae8"
+        }
+      });
 
-    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer) {
+      const view = new MapView({
+        container: "viewDiv",
 
-  esriConfig.apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
+        map: webmap
 
-  const map = new Map({
-    basemap: "arcgis-topographic" //Basemap layer service
+      });
+
+      const scalebar = new ScaleBar({
+        view: view
+      });
+
+      view.ui.add(scalebar, "bottom-left");
+
+    const legend = new Legend ({
+        view: view
+      });
+      view.ui.add(legend, "top-right");
+
   });
-
-  const view = new MapView({
-    map: map,
-    center: [-79.41969543011916,43.648643976148044], 
-    zoom: 13,
-    container: "viewDiv"
- });
-
- const graphicsLayer = new GraphicsLayer();
- map.add(graphicsLayer);
-
- const point = { //Create a point
-    type: "point",
-    longitude: -79.42792444722816, 
-    latitude: 43.64949792610948
- };
-    
- const point = { //Create a point
-    type: "point",
-    longitude: -79.41807537590346, 
-    latitude: 43.64978516109509
- };
-    
- const simpleMarkerSymbol = {
-    type: "simple-marker",
-    color: [220,20,60],  // Red
-    outline: {
-        color: [139,0,0], // White
-        width: 1
-    }
- };
-
- const pointGraphic = new Graphic({
-    geometry: point,
-    symbol: simpleMarkerSymbol
- });
- graphicsLayer.add(pointGraphic);
-
-    // Create a line geometry
- const polyline = {
-    type: "polyline",
-    paths: [
-        [-79.42792444722816, 43.64949792610948], //Longitude, latitude
-        [-79.42076831370575, 43.649296084487034], //Longitude, latitude 
-        [-79.41807537590346, 43.64978516109509],  //Longitude, latitude 
-    ]
- };
- const simpleLineSymbol = {
-    type: "simple-line",
-    color: [240,128,128], 
-    width: 2
- };
-
- const polylineGraphic = new Graphic({
-    geometry: polyline,
-    symbol: simpleLineSymbol
- });
- graphicsLayer.add(polylineGraphic);
-
- });
-</script>
+  </script>
 </head>
 <body>
   <div id="viewDiv"></div>
