@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a point, line, and polygon</title>
+  <title>Where to take your Valentine!</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -38,6 +38,13 @@
     zoom: 15,
     container: "viewDiv"
  });
+  // Add Feature Layer
+  const featureLayer = new FeatureLayer({
+  url:
+    "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Top_10_Coffee_in_Toronto/FeatureServer"
+  });
+  map.add(featureLayer);
+  // End 
 
  const graphicsLayer = new GraphicsLayer();
  map.add(graphicsLayer);
@@ -122,13 +129,6 @@
 
  });
  graphicsLayer.add(polygonGraphic);
- 
- // Add Feature Layer
-const featureLayer = new FeatureLayer({
-  url:
-    "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Top_10_Coffee_in_Toronto/FeatureServer"
-});
-graphicsLayer.add(featureLayer);
 
  });
 </script>
