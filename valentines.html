@@ -59,13 +59,13 @@
     </div>
 
     <script>
-      const apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
+      const apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02;
       const basemapEnum = "ArcGIS:Streets";
       const map = new maplibregl.Map({
         container: "map", // the id of the div element
         style: `https://basemaps-api.arcgis.com/arcgis/rest/services/styles/${basemapEnum}?type=style&token=${apiKey}`,
         zoom: 12, // starting zoom
-        center: [43.65309554868096, -79.38314949190969], // starting location [longitude, latitude]
+        center: [-79.38314949190969, 43.65309554868096], // starting location [longitude, latitude]
         attributionControl: false
       }).addControl(
         new maplibregl.AttributionControl({
