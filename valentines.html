@@ -20,11 +20,11 @@
     "esri/config",
     "esri/Map",
     "esri/views/MapView",
-
+    "esri/layers/FeatureLayer",
     "esri/Graphic",
     "esri/layers/GraphicsLayer"
 
-    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer) {
+    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer, FeatureLayer) {
 
   esriConfig.apiKey = "AAPK017ebdb0fbf4411b866cc73837065adfTpwhzalId76-2Uu_N1Aa4iC5Pr0BNmTaKFtEMTWFENWCkAdgPtUddKwSpKD9bHQv";
 
@@ -38,6 +38,15 @@
     zoom: 15,
     container: "viewDiv"
  }); 
+ 
+ // Add Feature Layer
+ 
+ const featureLayer = new FeatureLayer({
+  url:
+    "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Coffee_/FeatureServer"
+ });
+ map.add(featureLayer); 
+ // End
 
  const graphicsLayer = new GraphicsLayer();
  map.add(graphicsLayer);
