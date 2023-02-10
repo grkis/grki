@@ -8,9 +8,18 @@
     html, body, #viewDiv {
       padding: 0;
       margin: 0;
-      height: 100%;
+      height: 75%;
       width: 100%;
     }
+    .top {
+      background-colour: #ffdfe5;
+      display: block;
+      height: 25%;
+      justify-content: center;
+    }
+    h3 {
+      colour: #F64A8A;
+    } 
   </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.25/"></script>
@@ -143,6 +152,11 @@
 </script>
 </head>
 <body>
+  <div class = "top">
+    <h2> Ideas for dates around Toronto! </h2>
+    <h4> Need some ideas for Valentines day? Start at the red point on the map and have your dinner at one of Toronto's most romantic French restaurant. Then follow the red line to take your date to Trinity Bellwoods Park and enjoy the beautiful park after dinner! </h4>
+    <h4> Alternatively, if you are looking for a simple coffee date with your Valentine, visit one of the coffee shops located on the map. Click on the coffee cup icon to read up about the cafe and for drink recommendations. </h4>
+  </div>
   <div id="viewDiv"></div>
 </body>
 </html>
