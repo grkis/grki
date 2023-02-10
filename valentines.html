@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS Maps SDK for JavaScript Tutorials: Add a point, line, and polygon</title>
+  <title> Where to go with your Valentine! </title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -19,21 +19,20 @@
     "esri/config",
     "esri/Map",
     "esri/views/MapView",
-
     "esri/Graphic",
     "esri/layers/GraphicsLayer"
 
     ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer) {
 
-  esriConfig.apiKey = "YOUR_API_KEY";
+  esriConfig.apiKey = "AAPK5c0502f82c794ca99bf884c40574a0d92_c8l7MdG8NWn18NxXY9rAutv3pBAmHtj5yNCFWF1fyuv0lrz6czmgfGrtenfx02";
 
   const map = new Map({
-    basemap: "arcgis-topographic" //Basemap layer service
+    basemap: "arcgis-streets-night" //Basemap layer service
   });
 
   const view = new MapView({
     map: map,
-    center: [-118.80500,34.02700], //Longitude, latitude
+    center: [43.65334866962848, -79.38097551830482], //Longitude, latitude
     zoom: 13,
     container: "viewDiv"
  });
@@ -43,14 +42,14 @@
 
  const point = { //Create a point
     type: "point",
-    longitude: -118.80657463861,
-    latitude: 34.0005930608889
+    longitude: 43.6494019002754,
+    latitude: -79.42790560011771
  };
  const simpleMarkerSymbol = {
     type: "simple-marker",
-    color: [226, 119, 40],  // Orange
+    color: [220,20,60],  // Red
     outline: {
-        color: [255, 255, 255], // White
+        color: [0,0,0], // Black
         width: 1
     }
  };
