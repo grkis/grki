@@ -38,13 +38,29 @@
     zoom: 13
   });
 
-//Trailheads feature layer (points)
-  const trailheadsLayer = new FeatureLayer({
-    url: "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Top_10_Coffee_in_Toronto/FeatureServer"
-  });
+  const graphicsLayer = new GraphicsLayer();
+   map.add(graphicsLayer);
 
-  map.add(trailheadsLayer);
-
+  const point = { //Create a point
+   type: "point",
+   longitude: -79.42789226082195,
+   latitude: 43.64937371598194
+  };
+  const simpleMarkerSymbol = {
+   type: "simple-marker",
+   color: [226, 119, 40],  // Orange
+   outline: {
+       color: [255, 255, 255], // White
+       width: 1
+   }
+  };
+    
+  const pointGraphic = new Graphic({
+   geometry: point,
+   symbol: simpleMarkerSymbol
+ });
+ graphicsLayer.add(pointGraphic);  
+    
   });
 </script>
 
