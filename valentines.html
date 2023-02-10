@@ -24,7 +24,7 @@
     "esri/Graphic",
     "esri/layers/GraphicsLayer"
 
-    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer, WebMap) {
+    ], function(esriConfig, MapView, Graphic, GraphicsLayer, WebMap) {
 
   esriConfig.apiKey = "AAPK017ebdb0fbf4411b866cc73837065adfTpwhzalId76-2Uu_N1Aa4iC5Pr0BNmTaKFtEMTWFENWCkAdgPtUddKwSpKD9bHQv";
 
@@ -35,9 +35,11 @@
  });
   
   const view = new MapView({
-  map: webmap,  // The WebMap instance created above
-  container: "viewDiv"
- });
+    container: "viewDiv",
+
+    map: webmap
+
+  });
 
  const graphicsLayer = new GraphicsLayer();
  webmap.add(graphicsLayer);
