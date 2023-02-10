@@ -20,36 +20,27 @@
     "esri/config",
     "esri/Map",
     "esri/views/MapView",
-    "esri/layers/FeatureLayer",
+    "esri/WebMap",
     "esri/Graphic",
     "esri/layers/GraphicsLayer"
 
-    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer, FeatureLayer) {
+    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer, WebMap) {
 
   esriConfig.apiKey = "AAPK017ebdb0fbf4411b866cc73837065adfTpwhzalId76-2Uu_N1Aa4iC5Pr0BNmTaKFtEMTWFENWCkAdgPtUddKwSpKD9bHQv";
 
-  const map = new Map({
-    basemap: "arcgis-topographic" //Basemap layer service
-  });
-
-  const view = new MapView({
-    map: map,
-    center: [-79.427902, 43.649389], //Longitude, latitude
-    zoom: 15,
-    container: "viewDiv"
- }); 
- 
- // Add Feature Layer
- 
- const featureLayer = new FeatureLayer({
-  url:
-    "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Coffee_/FeatureServer"
+  const webmap = new WebMap({
+   portalItem: {
+     id: "29055995714b4f40a7277743922fc3d2"
+   }
  });
- map.add(featureLayer); 
- // End
+  
+  const view = new MapView({
+  map: webmap,  // The WebMap instance created above
+  container: "viewDiv"
+ });
 
  const graphicsLayer = new GraphicsLayer();
- map.add(graphicsLayer);
+ webmap.add(graphicsLayer);
 
  const point = { //Create a point
     type: "point",
