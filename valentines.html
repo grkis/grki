@@ -37,14 +37,7 @@
     center: [-79.427902, 43.649389], //Longitude, latitude
     zoom: 15,
     container: "viewDiv"
- });
-  // Add Feature Layer
-  const featureLayer = new FeatureLayer({
-  url:
-    "https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/Top_10_Coffee_in_Toronto/FeatureServer"
-  });
-  map.add(featureLayer);
-  // End 
+ }); 
 
  const graphicsLayer = new GraphicsLayer();
  map.add(graphicsLayer);
