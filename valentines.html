@@ -14,17 +14,18 @@
   </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.25/"></script>
+  
   <script>
 
   require([
     "esri/config",
     "esri/Map",
-    "esri/views/MapView",
     "esri/WebMap",
+    "esri/views/MapView",
     "esri/Graphic",
     "esri/layers/GraphicsLayer"
 
-    ], function(esriConfig, Map, MapView, WebMap, Graphic, GraphicsLayer) {
+    ], function(esriConfig, WebMap, MapView, Graphic, GraphicsLayer) {
 
   esriConfig.apiKey = "AAPKe1cb997831f440dbb6ca763d598f67fbCvyW4diaNptvNM9iDQAmm97PLLgGxOqP326lm9Pz9wuuj7r50EsaYl8tpw0hsmuk";
 
@@ -40,6 +41,103 @@
     map: webmap
 
   });
+    
+  const graphicsLayer = new GraphicsLayer();
+  webmap.add(graphicsLayer);
+
+ const point = { //Create a point
+    type: "point",
+    longitude: -79.427902, 
+    latitude: 43.649389
+ };
+ const simpleMarkerSymbol = {
+    type: "simple-marker",
+    color: [220,20,60],  // Red
+    outline: {
+        color: [255, 255, 255], // White
+        width: 1
+    }
+ };
+
+ const popupTemplate1 = {
+    title: "{Name}",
+    content: "{Description}"
+ }
+ const attributes1 = {
+    Name: "Milou",
+    Description: "Start your date at a cozy and romantic French restaurant."
+ }   
+    
+ const pointGraphic = new Graphic({
+    geometry: point,
+    symbol: simpleMarkerSymbol,
+   
+    attributes: attributes1,
+    popupTemplate: popupTemplate1
+ });
+ graphicsLayer.add(pointGraphic);
+
+    // Create a line geometry
+ const polyline = {
+    type: "polyline",
+    paths: [
+        [-79.427902, 43.649389], //Longitude, latitude
+        [-79.420817, 43.649296], //Longitude, latitude
+        [-79.418086, 43.649768]  //Longitude, latitude
+    ]
+ };
+ const simpleLineSymbol = {
+    type: "simple-line",
+    color: [220,20,60], // Red
+    width: 2
+ };
+
+ const polylineGraphic = new Graphic({
+    geometry: polyline,
+    symbol: simpleLineSymbol
+ });
+ graphicsLayer.add(polylineGraphic);
+
+ // Create a polygon geometry
+ const polygon = {
+    type: "polygon",
+    rings: [
+        [-79.418086, 43.649768], //Longitude, latitude
+        [-79.415994, 43.644858], //Longitude, latitude
+        [-79.411587, 43.645769], //Longitude, latitude
+        [-79.413544, 43.650693],   //Longitude, latitude
+        [-79.418086, 43.649768]  //Longitude, latitude
+    ]
+ };
+
+ const simpleFillSymbol = {
+    type: "simple-fill",
+    color: [240,128,128, 0.6],  // Orange, opacity 80%
+    outline: {
+        color: [255, 255, 255],
+        width: 1
+    }
+ };
+
+ const popupTemplate = {
+    title: "{Name}",
+    content: "{Description}"
+ }
+ const attributes = {
+    Name: "Trinity Bellwoods Park",
+    Description: "End your date at Trinity Bellwords Park."
+ }
+
+ const polygonGraphic = new Graphic({
+    geometry: polygon,
+    symbol: simpleFillSymbol,
+
+    attributes: attributes,
+    popupTemplate: popupTemplate
+
+ });
+ graphicsLayer.add(polygonGraphic);
+
 
  
  });
